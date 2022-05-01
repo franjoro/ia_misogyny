@@ -29,7 +29,6 @@ class Data:
             self.y = self.TRAIN_DF.groups
         else:
             raise Exception("Invalid column: "+column)
-        print(self.TRAIN_DF.columns)
 
     def k_fold_train_test_sets(self):
         x_train_sets = []
@@ -46,7 +45,6 @@ class Data:
         return x_train_sets, y_train_sets, x_test_sets, y_test_sets
 
     def preprocess_data(self):
-        print(self.TRAIN_DF)
         self.TRAIN_DF.text = self.TRAIN_DF.text.apply(preprocess_tweet)
         self.TEST_DF.text = self.TEST_DF.text.apply(preprocess_tweet)
 

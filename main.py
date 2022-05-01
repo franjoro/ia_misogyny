@@ -1,5 +1,6 @@
 from ai.main import ai
 
+
 def main():
     # TODO: Esto también se podría mejorar
     ai("label")
@@ -7,7 +8,6 @@ def main():
     ai("category2")
     ai("category3")
     ai("category4")
-    ai("category5")
     ai("single")
     ai("groups")
 
