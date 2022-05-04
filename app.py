@@ -2,11 +2,12 @@ from unicodedata import category
 
 from sklearn.utils import resample
 from ai.main import ai
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 import pandas as pd
 from ai.main import ai
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 
 
 @app.route('/')
@@ -81,6 +82,11 @@ def checkMessage():
       '],"single":[' + singleResults + '], "groups":[' + groupsResults + ']}'
 
   return response
+
+
+@app.route("/static/<path:path>")
+def static_dir(path):
+    return send_from_directory("static", path)
 
 
 if __name__ == '__main__':
