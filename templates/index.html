@@ -2,256 +2,91 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-  <title>Detector de misoginia</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <title>Detector de misoginia</title>
 </head>
 
 <body class="d-flex h-100 text-center text-white bg-dark">
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-      <div>
-        <!-- <h3 class="float-md-start mb-0">Misogyny detector v0.3</h3> -->
-      </div>
-    </header>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <!-- <h3 class="float-md-start mb-0">Misogyny detector v0.3</h3> -->
+            </div>
+        </header>
 
-    <main class="px-3" style="margin-bottom: 100px;">
-      <h1>Misogyny detector</h1>
-      <p class="lead">
-        Herramienta creada para la detección de misoginia en textos.
-      </p>
-      <label for="message">Ingresar textos:</label>
+        <main class="px-3">
+            <h1>Misogyny detector</h1>
+            <p class="lead">
+                Herramienta creada para la detección de misoginia en textos.
+            </p>
+            <label for="message">Ingresar textos:</label>
 
-      <div id="textos">
-        <div class="mb-3">
-          <textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea>
+            <div id="textos">
+                <div class="mb-3">
+                    <textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary" id="addTextButton">Agregar nuevo texto</a>
+            <input class="btn btn-success" type="button" id="saveBtn" value="Detectar" />
+        </main>
+
+        <div class="container-fluid" id="resultados" style="display: none;">
+            <hr />
+            <label for="message">Resultados:</label>
+            <table class="table text-white table-bordered">
+                <thead>
+                    <tr>
+                        <th>Texto analizado</th>
+                        <th>Misoginia</th>
+                        <th>Categoría 1</th>
+                        <th>Categoría 2</th>
+                        <th>Categoría 3</th>
+                        <th>Categoría 4</th>
+                        <th>Personal</th>
+                        <th>Grupos</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTable">
+                </tbody>
+            </table>
         </div>
-      </div>
-      <a href="#" class="btn btn-primary" id="addTextButton">Agregar nuevo texto</a>
-      <input class="btn btn-success" type="button" id="saveBtn" value="Detectar" />
-    </main>
 
-    <div class="container-fluid" id="resultados" style="display: none;" >
-      <hr />
-      <label for="message">Resultados:</label>
-      <table class="table text-white table-bordered">
-        <thead>
-          <tr>
-            <th>Texto analizado</th>
-            <th>Misoginia</th>
-            <th>Categoría 1</th>
-            <th>Categoría 2</th>
-            <th>Categoría 3</th>
-            <th>Categoría 4</th>
-            <th>Personal</th>
-            <th>Grupos</th>
-          </tr>
-        </thead>
-        <tbody id="bodyTable">
-          <tr>
-            <td>Hola a todos :)</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-          </tr>
-          <tr>
-            <td>El feminismo es una moda</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-          </tr>
-          <tr>
-            <td>¿Las feministas también van a cobrar los $300 del estado opresor?</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-          </tr>
-          <tr>
-            <td>que estupidas las feminazis</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-          </tr>
-          <tr>
-            <td>Después se quejan las feminazis de que las ofenden. ¿No será que se han puesto de acuerdo para sacar dinero a la gente?</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-          </tr>
-          <tr>
-            <td>Jajajajajaj @user   la defensora de misoginos... jajajajaja gran referente de la hipocresía "feminista"</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Negativo</td>
-            <td>Verdadero</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <footer class="row py-5 my-5 bg-white" >
-        <div class="col-9">
-          <img style="width: 180px;" src="{{url_for('static', filename='images/ormusa.png')}}" alt="" />
-          <img style="width: 250px;" src="{{url_for('static', filename='images/paz.png')}}" alt="" />
-          <img style="width: 250px;" src="{{url_for('static', filename='images/gara.png')}}" alt="" />
-          <img style="width: 180px;" src="{{url_for('static', filename='images/eusko.png')}}" alt="" />
-        </div>
-        <div class="col-3">
-            <h5>Preguntras frecuentes</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#" onclick="explicacionResultados()" class="nav-link p-0 ">¿Necesitas ayuda con los
+        <footer class="row py-5 my-5 ">
+            <div class="col-9">
+                <img style="width: 180px;" src="{{url_for('static', filename='images/ormusa.png')}}" alt="" />
+                <img style="width: 250px;" src="{{url_for('static', filename='images/paz.png')}}" alt="" />
+                <img style="width: 250px;" src="{{url_for('static', filename='images/gara.png')}}" alt="" />
+                <img style="width: 180px;" src="{{url_for('static', filename='images/eusko.png')}}" alt="" />
+            </div>
+            <div class="col-3">
+                <h5>Preguntras frecuentes</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" onclick="explicacionResultados()" class="nav-link p-0 text-muted">¿Necesitas ayuda con los
                   resultados?</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#" onclick="disclaimer()" class="nav-link p-0">¿No concuerdas con los resultados?
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" onclick="disclaimer()" class="nav-link p-0 text-muted">¿No concuerdas con los resultados?
                 </a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="https://www.europarl.europa.eu/news/es/headlines/society/20200827STO85804/que-es-la-inteligencia-artificial-y-como-se-usa"
-                  class="nav-link p-0">¿Qué es la Inteligencia artificial?</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="https://drive.google.com/file/d/1VmE6u9ARVVE-su6CLV0whcx4yW6lQa35/view?usp=sharing"
-                  class="nav-link p-0">¿Comó funciona esta IA?</a>
-              </li>
-            </ul>
-        </div>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="https://www.europarl.europa.eu/news/es/headlines/society/20200827STO85804/que-es-la-inteligencia-artificial-y-como-se-usa" class="nav-link p-0 text-muted">¿Qué es la Inteligencia artificial?</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="https://drive.google.com/file/d/1VmE6u9ARVVE-su6CLV0whcx4yW6lQa35/view?usp=sharing" class="nav-link p-0 text-muted">¿Comó funciona esta IA?</a>
+                    </li>
+                </ul>
+            </div>
 
-    </footer>
-  </div>
+        </footer>
+    </div>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-  const loaderAlert = () => {
-    Swal.fire({
-      title:
-        "Por favor, espere estamos clasificando los resultados, esto puede tardar algúnos minutos",
-      html: "Cargando información necesaria...",
-      allowOutsideClick: !1,
-      showConfirmButton: false,
-      timer: 3000,
-      willOpen: () => {
-        Swal.showLoading();
-      },
-    }).then(function () {
-    $("#resultados").css("display", "block");
-
-    });
-  };
-
-  const explicacionResultados = () => {
-    Swal.fire({
-      title: "",
-      width: 2000,
-      html: `      <table class="table text-black">
-        <thead>
-          <tr>
-            <th>Categoría 1</th>
-            <th>Categoría 2</th>
-            <th>Categoría 3</th>
-            <th>Categoría 4</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>"Estereotipo: define aquellos mensajes cuyo contenido hace referencia a un
-estereotipo u objetificación. Son mensajes que hablan de una imagen o una
-idea generalizada y simplificada de la mujer. Suelen estar relacionados con
-aspectos referentes al físico y tienden a realizar comparaciones con estándares impuestos."</td>  
-            <td>Desvío de atención: definen mensajes que tienden a desviar la atención de un problema y con el fin de justificar el abuso   se rechaza la responsabilidad masculina. Es una forma de interrumpir la conversación y redirigirla a un ámbito más cómodo para los hombres</td>  
-            <td>Ataque sexual: hace referencia a mensajes en los que está presente acciones de acoso sexual o amenazas violentas con el fin de afirmar el poder</td>  
-            <td>Descrédito/desprestigio: hace referencia a casos de desprestigio hacia una mujer. El fin de
-estos tweets es hablar mal de una mujer sin ningún otro objetivo.</td>  
-          </tr>
-        </tbody>
-      </table>`,
-    });
-  };
-
-  $("#addTextButton").click(function () {
-    const html = `<div class="mb-3"><textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea></div>`;
-    $("#textos").append(html);
-  });
-
-  $("#saveBtn").click(function () {
-    const arr = [];
-    $(".cnt").each(function () {
-      arr.push($(this).val());
-    });
-    loaderAlert();
-    // Swal.close();
-    // $("#resultados").css("display", "none");
-    // $.ajax({
-    //   url: '{{url_for("checkMessage")}}',
-    //   type: "post",
-    //   data: { textos: arr },
-    //   success: function (res) {
-    //     const respuesta = JSON.parse(res);
-    //     console.log(respuesta);
-    //     fillTable(respuesta, arr);
-    //     Swal.close();
-    //   },
-    // });
-  });
-
-  const fillTable = (respuesta, textos) => {
-    let html = ``;
-
-    textos.forEach((txt, index) => {
-      html += `<tr>
-          <td>${txt}</td>
-          <td>${respuesta.label[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.category1[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.category2[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.category3[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.category4[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.single[index] ? "Afirmativo" : "Negativo"}</td>
-          <td>${respuesta.groups[index] ? "Afirmativo" : "Negativo"}</td>
-        </tr>`;
-    });
-    $("#bodyTable").html("");
-    $("#bodyTable").append(html);
-    $("#resultados").css("display", "block");
-
-    const reload = `<div class="mb-3"><textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea></div>`;
-    $("#textos").html(reload);
-  };
-  const disclaimer = () => {
-    Swal.fire(
-      "Los resultados de la inteligencia artificial están basados en el análisis matemáticos de un conjunto de textos establecidos como misóginos o no misóginos, el resultado puede fallar o discordar de la realidad si este contiene palabras establecidas como clave en un contexto no clasificado como misógino. Esta aplicación está en desarrollo y los resultados no deben tomarse como una clasificación oficial, Se recomienda la búsqueda de ayuda profesional en caso sea necesario "
-    );
-  };
-</script>
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
 
 </html>
