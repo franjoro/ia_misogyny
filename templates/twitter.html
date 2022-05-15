@@ -15,24 +15,66 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-               <a href="/twitter"> <h5 class="float-md-end mb-0">Herramientas de búsqueda en Twitter</h5></a>
+               <a href=""> <h5 class="float-md-end mb-0">Análisis de textos</h5></a>
             </div>
         </header>
 
         <main class="px-3">
-            <h1>Misogyny detector</h1>
+            <h1>Herramientas de búsqueda con Twitter</h1>
             <p class="lead">
                 Herramienta creada para la detección de misoginia en textos en conjunto con herramientas para la obtención de Tweets.
             </p>
-            <label for="message">Ingresar textos:</label>
 
-            <div id="textos">
-                <div class="mb-3">
-                    <textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea>
+
+
+            <div class="row text-black">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                          Búsqueda por @usuario de Twitter
+                        </div>
+                        <div class="card-body">
+                          <h6 class="card-title">Coloque el nombre de usuario para analizar los últimos Tweets publicados</h6>
+                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                          <input type="text" id="inputUsuario" class="form-control" placeholder="Ejemplo: @usuario" >
+                          <hr>
+                          <a href="#" id="btnUsuario" class="btn btn-primary">Buscar y análizar</a>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                          Búsqueda por #Topic de Twitter
+                        </div>
+                        <div class="card-body">
+                          <h6 class="card-title">Coloque una palabra clave para analizar los últimos Tweets publicados en Español</h6>
+                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                          <input type="text" id="inputTopic" class="form-control" placeholder="Ejemplo: #Acontecimiento" >
+                          <hr>
+                          <a href="#" id="btnTopic" class="btn btn-primary">Buscar y análizar</a>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                          Tweet único
+                        </div>
+                        <div class="card-body">
+                          <h6 class="card-title">Pegue un enlace directo de un Tweet único para ser analizado</h6>
+                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                          <input type="text" id="inputEnlace" class="form-control" placeholder="Ejemplo: https://twitter.com/usuario/status/1525597012544086023" >
+                          <hr>
+                          <a href="#" id="btnEnlace" class="btn btn-primary">Análizar</a>
+                        </div>
+                      </div>
                 </div>
             </div>
-            <a href="#" class="btn btn-primary" id="addTextButton">Agregar nuevo texto</a>
-            <input class="btn btn-success" type="button" id="saveBtn" value="Detectar" />
+
+
+
+            <!-- <input class="btn btn-success" type="button" id="saveBtn" value="Detectar" /> -->
         </main>
 
         <div class="container-fluid" id="resultados" style="display: none;">

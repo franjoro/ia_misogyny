@@ -92,11 +92,10 @@ def searchTweets(searchParam):
     url = create_url_search()
     params = get_params_search(searchParam)
     json_response = connect_to_endpoint(url, params)
-
     tweets = json.loads(json.dumps(json_response))['data']
     formatData = []
     i = 1
     for tweet in tweets:
       formatData.append([i, tweet['text']])
       i = i+1
-    return formatData, json.dumps(json_response, indent=4, sort_keys=True)
+    return formatData

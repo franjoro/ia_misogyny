@@ -15,28 +15,36 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/twitter')
+def twitter():
+    return render_template('twitter.html')
+
+
 @app.route('/getTweetsByUsername', methods=['POST'])
 def getTweetsByUsername():
     if request.method == 'POST':
-        username = request.form.get("username")
+        username = request.form.get("data")
         tweets = getTweetsByUser(username)
         train = pd.DataFrame(tweets, columns=['id', 'text'])
         train.to_csv('./data/test2.csv', index=False)
         data = []
         for tweet in tweets:
             data.append(tweet[1])
-    return json.dumps(data)
+        return json.dumps(data)
 
 
 @app.route('/getTweetByLink', methods=['POST'])
 def getTweetByLink():
     if request.method == 'POST':
-        enlace = request.form.get("enlace")
+        enlace = request.form.get("data")
         id = enlace.split('/')[5]
         tweet = getTweet(id)
         train = pd.DataFrame(tweet, columns=['id', 'text'])
         train.to_csv('./data/test2.csv', index=False)
-    return tweet[0][1]
+        data = []
+        for twet in tweet:
+            data.append(twet[1])
+        return json.dumps(data)
 
 
 @app.route('/checkMessage', methods=['POST'])
@@ -56,11 +64,14 @@ def checkMessage():
 @app.route('/search', methods=['POST'])
 def search():
     if request.method == 'POST':
-        searchParam = request.form.get("searchParam")
-        dataSet, respuesta = searchTweets(searchParam)
+        searchParam = request.form.get("data")
+        dataSet = searchTweets(searchParam)
         train = pd.DataFrame(dataSet, columns=['id', 'text'])
         train.to_csv('./data/test2.csv', index=False)
-    return respuesta
+        data = []
+        for tweet in dataSet:
+            data.append(tweet[1])
+    return json.dumps(data)
 
 
 @app.route("/static/<path:path>")
@@ -75,13 +86,13 @@ def analizar():
 
 
 def analizarYResponder():
-    ai("label")
-    ai("category1")
-    ai("category2")
-    ai("category3")
-    ai("category4")
-    ai("single")
-    ai("groups")
+    ai("label", 'train.csv')
+    ai("category1", 'train_category1.csv')
+    ai("category2", 'train_category2.csv')
+    ai("category3", 'train_category3.csv')
+    ai("category4", 'train_category4.csv')
+    ai("single", 'train_single.csv')
+    ai("groups", 'train_groups.csv')
 
     label = pd.read_csv('submissions/lr_submission_label.csv')
     category1 = pd.read_csv('submissions/lr_submission_category1.csv')

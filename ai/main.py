@@ -51,9 +51,9 @@ def write_submission(y_pred, submission_file, column):
         writer.writerows(rows)
 
 
-def ai(column):
+def ai(column, path):
     # Crear objeto data
-    data = Data('./data/train.csv', './data/test2.csv', column)
+    data = Data('./data/'+path, './data/test2.csv', column)
     # # normalizar cada tweet
     data.preprocess_data()
     x_train_sets, y_train_sets, x_test_sets, y_test_set = data.k_fold_train_test_sets()
