@@ -51,9 +51,9 @@ def write_submission(y_pred, submission_file, column):
         writer.writerows(rows)
 
 
-def ai(column, path):
+def ai(column, path, pathTestDocument='test2.csv'):
     # Crear objeto data
-    data = Data('./data/'+path, './data/test2.csv', column)
+    data = Data('./data/'+path, './data/'+pathTestDocument, column)
     # # normalizar cada tweet
     data.preprocess_data()
     x_train_sets, y_train_sets, x_test_sets, y_test_set = data.k_fold_train_test_sets()
@@ -65,21 +65,21 @@ def ai(column, path):
         data.TRAIN_DF.text, data.TEST_DF.text, [3000, 0.4], "TFIDF")
 
     # TODO: Es probable que esto se pueda refactorizar, por ahora así deberia de funcionar
-    if(column=="label"):
+    if(column == "label"):
         y_train = data.TRAIN_DF.label
-    elif(column=="category1"):
+    elif(column == "category1"):
         y_train = data.TRAIN_DF.category1
-    elif(column=="category2"):
+    elif(column == "category2"):
         y_train = data.TRAIN_DF.category2
-    elif(column=="category3"):
+    elif(column == "category3"):
         y_train = data.TRAIN_DF.category3
-    elif(column=="category4"):
+    elif(column == "category4"):
         y_train = data.TRAIN_DF.category4
-    elif(column=="category5"):
+    elif(column == "category5"):
         y_train = data.TRAIN_DF.category5
-    elif(column=="single"):
+    elif(column == "single"):
         y_train = data.TRAIN_DF.single
-    elif(column=="groups"):
+    elif(column == "groups"):
         y_train = data.TRAIN_DF.groups
     else:
         raise Exception("Invalid column: "+column)
@@ -88,5 +88,6 @@ def ai(column, path):
     print("Predictions for the LogisticRegression Model")
     y_pred = prediction(x_train, y_train, x_test, "LogisticRegression")
 
-    write_submission(y_pred, "./submissions/lr_submission_"+column+".csv", column)
-    #write_submission(y_pred, "./submissions/lr_submission_.csv", column) Descomentar SOLO si los archivos no se sobreescriben y comentar la linea de arriba.
+    write_submission(y_pred, "./submissions/lr_submission_" +
+                     column+".csv", column)
+    # write_submission(y_pred, "./submissions/lr_submission_.csv", column) Descomentar SOLO si los archivos no se sobreescriben y comentar la linea de arriba.

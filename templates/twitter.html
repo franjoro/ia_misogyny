@@ -11,11 +11,13 @@
 
 
 <body class="d-flex h-100 text-center text-white bg-dark">
-    
+
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
-               <a href=""> <h5 class="float-md-end mb-0">Análisis de textos</h5></a>
+                <a href="">
+                    <h5 class="float-md-end mb-0">Análisis de textos</h5>
+                </a>
             </div>
         </header>
 
@@ -28,47 +30,63 @@
 
 
             <div class="row text-black">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                          Búsqueda por @usuario de Twitter
+                            Búsqueda por @usuario de Twitter
                         </div>
                         <div class="card-body">
-                          <h6 class="card-title">Coloque el nombre de usuario para analizar los últimos Tweets publicados</h6>
-                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-                          <input type="text" id="inputUsuario" class="form-control" placeholder="Ejemplo: @usuario" >
-                          <hr>
-                          <a href="#" id="btnUsuario" class="btn btn-primary">Buscar y análizar</a>
+                            <h6 class="card-title">Coloque el nombre de usuario para analizar los últimos Tweets publicados</h6>
+                            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                            <input type="text" id="inputUsuario" class="form-control" placeholder="Ejemplo: @usuario">
+                            <hr>
+                            <a href="#" id="btnUsuario" class="btn btn-primary">Buscar y análizar</a>
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                          Búsqueda por #Topic de Twitter
+                            Búsqueda por #Topic de Twitter
                         </div>
                         <div class="card-body">
-                          <h6 class="card-title">Coloque una palabra clave para analizar los últimos Tweets publicados en Español</h6>
-                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-                          <input type="text" id="inputTopic" class="form-control" placeholder="Ejemplo: #Acontecimiento" >
-                          <hr>
-                          <a href="#" id="btnTopic" class="btn btn-primary">Buscar y análizar</a>
+                            <h6 class="card-title">Coloque una palabra clave para analizar los últimos Tweets publicados en Español</h6>
+                            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                            <input type="text" id="inputTopic" class="form-control" placeholder="Ejemplo: #Acontecimiento">
+                            <hr>
+                            <a href="#" id="btnTopic" class="btn btn-primary">Buscar y análizar</a>
                         </div>
-                      </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card">
                         <div class="card-header">
-                          Tweet único
+                            Tweet único
                         </div>
                         <div class="card-body">
-                          <h6 class="card-title">Pegue un enlace directo de un Tweet único para ser analizado</h6>
-                          <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-                          <input type="text" id="inputEnlace" class="form-control" placeholder="Ejemplo: https://twitter.com/usuario/status/1525597012544086023" >
-                          <hr>
-                          <a href="#" id="btnEnlace" class="btn btn-primary">Análizar</a>
+                            <h6 class="card-title">Pegue un enlace directo de un Tweet único para ser analizado</h6>
+                            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                            <input type="text" id="inputEnlace" class="form-control" placeholder="Ejemplo: https://twitter.com/usuario/status/1525597012544086023">
+                            <hr>
+                            <a href="#" id="btnEnlace" class="btn btn-primary">Análizar</a>
                         </div>
-                      </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Analizar un documento
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title">Descaga y luego sube un documento con el siguiente formato:
+                                <a href="/download">DESCARGAR FORMATO</a>
+                            </h6>
+                            <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                            <input type="file" id="file" class="form-control">
+                            <hr>
+                            <a href="#" id="btnFile" class="btn btn-primary">Subir y análizar</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 

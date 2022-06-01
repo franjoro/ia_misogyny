@@ -1,13 +1,62 @@
 from unicodedata import category
 import json
+from urllib import response
 from sklearn.utils import resample
 from ai.main import ai
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, flash, redirect, url_for
 import pandas as pd
 from ai.main import ai
 from twitter.twcontroller import getTweetsByUser, getTweet, searchTweets
+import os
+from werkzeug.utils import secure_filename
+
+
+UPLOAD_FOLDER = './data'
+ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__, static_url_path='/static')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/uploadFile', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            # iaResults = analizarYResponder(filename)
+            textos = textosDocumentos(filename)
+            respuesta = '{"textos":' + json.dumps(textos) + '}'
+            return respuesta
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+
+
+@app.route('/download')
+def download_file():
+    return send_from_directory(app.config["UPLOAD_FOLDER"], 'testExample.csv')
 
 
 @app.route('/')
@@ -79,20 +128,28 @@ def static_dir(path):
     return send_from_directory("static", path)
 
 
-@app.route('/analizar', methods=['POST'])
-def analizar():
-    respuesta = analizarYResponder()
+@app.route('/analizar/<path>',  defaults={'path': 'test2.csv'},  methods=['POST'])
+def analizar(path):
+    respuesta = analizarYResponder(path)
     return respuesta
 
 
-def analizarYResponder():
-    ai("label", 'train.csv')
-    ai("category1", 'train_category1.csv')
-    ai("category2", 'train_category2.csv')
-    ai("category3", 'train_category3.csv')
-    ai("category4", 'train_category4.csv')
-    ai("single", 'train_single.csv')
-    ai("groups", 'train_groups.csv')
+def textosDocumentos(path):
+    data = pd.read_csv('./data/'+path, sep=',')
+    textos = []
+    for index, row in data.iterrows():
+        textos.append(str(row['text']))
+    return textos
+
+
+def analizarYResponder(pathDocument='test2.csv'):
+    ai("label", 'train.csv', pathDocument)
+    ai("category1", 'train_category1.csv', pathDocument)
+    ai("category2", 'train_category2.csv', pathDocument)
+    ai("category3", 'train_category3.csv', pathDocument)
+    ai("category4", 'train_category4.csv', pathDocument)
+    ai("single", 'train_single.csv', pathDocument)
+    ai("groups", 'train_groups.csv', pathDocument)
 
     label = pd.read_csv('submissions/lr_submission_label.csv')
     category1 = pd.read_csv('submissions/lr_submission_category1.csv')
