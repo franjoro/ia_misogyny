@@ -6,3 +6,6 @@ nltk
 seaborn
 matplotlib
 openyxl
+flask
+requests
+python-dotenv

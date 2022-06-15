@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import GridSearchCV
-from data import Data
+from ai.data import Data
 
 
 n_estimators = [2000, 2250, 2500, 2750, 3000]

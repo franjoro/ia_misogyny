@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <title>Detector de misoginia</title>
+</head>
+
+
+<body class="d-flex h-100 text-center text-white bg-dark">
+    
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+               <a href="/twitter"> <h5 class="float-md-end mb-0">Herramientas de búsqueda en Twitter</h5></a>
+            </div>
+        </header>
+
+        <main class="px-3">
+            <h1>Misogyny detector</h1>
+            <p class="lead">
+                Herramienta creada para la detección de misoginia en textos en conjunto con herramientas para la obtención de Tweets.
+            </p>
+            <label for="message">Ingresar textos:</label>
+
+            <div id="textos">
+                <div class="mb-3">
+                    <textarea name="text[]" class="cnt form-control" cols="30" rows="1"></textarea>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary" id="addTextButton">Agregar nuevo texto</a>
+            <input class="btn btn-success" type="button" id="saveBtn" value="Detectar" />
+        </main>
+
+        <div class="container-fluid" id="resultados" style="display: none;">
+            <hr />
+            <label for="message">Resultados:</label>
+            <table class="table text-white table-bordered">
+                <thead>
+                    <tr>
+                        <th>Texto analizado</th>
+                        <th>Misoginia</th>
+                        <th>Categoría 1</th>
+                        <th>Categoría 2</th>
+                        <th>Categoría 3</th>
+                        <th>Categoría 4</th>
+                        <th>Personal</th>
+                        <th>Grupos</th>
+                    </tr>
+                </thead>
+                <tbody id="bodyTable">
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="row py-5 my-5">
+            <div class="col-9">
+                <img style="width: 250px;" src="{{url_for('static', filename='images/paz.png')}}" alt="" />
+                <img style="width: 160px;" src="{{url_for('static', filename='images/ormusa.png')}}" alt="" />
+                <img style="width: 250px;" src="{{url_for('static', filename='images/gara.png')}}" alt="" />
+                <img style="width: 180px;" src="{{url_for('static', filename='images/eusko.png')}}" alt="" />
+            </div>
+            <div class="col-3">
+                <h5>Preguntras frecuentes</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" onclick="explicacionResultados()" class="nav-link p-0 text-muted">¿Necesitas ayuda con los
+                  resultados?</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" onclick="disclaimer()" class="nav-link p-0 text-muted">¿No concuerdas con los resultados?
+                </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="https://www.europarl.europa.eu/news/es/headlines/society/20200827STO85804/que-es-la-inteligencia-artificial-y-como-se-usa" class="nav-link p-0 text-muted">¿Qué es la Inteligencia artificial?</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="https://drive.google.com/file/d/1VmE6u9ARVVE-su6CLV0whcx4yW6lQa35/view?usp=sharing" class="nav-link p-0 text-muted">¿Comó funciona esta IA?</a>
+                    </li>
+                </ul>
+            </div>
+
+        </footer>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{url_for('static', filename='js/index.js')}}"></script>
+
+</html>
